@@ -1,0 +1,129 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+Stud_perform = pd.read_csv("StudentPerformance.csv")
+
+Stud_perform.isnull()
+
+
+series = pd.isnull(Stud_perform["Math Score"])
+Stud_perform[series]
+
+Stud_perform.notnull()
+
+series = pd.notnull(Stud_perform["Math Score"])
+Stud_perform[series]
+
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+
+Stud_perform['Gender'] = le.fit_transform(Stud_perform['Gender'])
+newStud_perform = Stud_perform
+Stud_perform
+
+missing_values = ["Na", "na"]
+Stud_perform = pd.read_csv("StudentPerformance.csv", na_values =
+missing_values)
+Stud_perform
+
+Stud_perform = pd.read_csv("StudentPerformance.csv")
+Stud_perform
+newStud_perform=Stud_perform
+newStud_perform.fillna(0)
+
+m_v=Stud_perform['Math Score'].mean()
+Stud_perform['Math Score'].fillna(value=m_v, inplace=True)
+Stud_perform
+
+newStud_perform.replace(to_replace = np.nan, value = -99)
+
+Stud_perform = pd.read_csv("StudentPerformance.csv")
+Stud_perform
+newStud_perform.dropna()
+
+newStud_perform.dropna(how='all')
+
+newStud_perform.dropna(axis = 1)
+
+new_data = newStud_perform.dropna(axis = 0, how ='any')
+new_data
+
+col = ['Math Score', 'Reading Score','Placement Score']
+Stud_perform.boxplot(col)
+plt.show()
+
+print(np.where(Stud_perform['Math Score']>90))
+print(np.where(Stud_perform['Reading Score']>25))
+
+Stud_perform
+
+fig, ax = plt.subplots(figsize = (18,10))
+ax.scatter(Stud_perform['Placement Score'], Stud_perform['Placement Offer Count'])
+plt.show()
+
+print(np.where((Stud_perform['Placement Score']<85) & (Stud_perform['Placement Score']>50) & (Stud_perform['Placement Offer Count']>1)))
+print(np.where((Stud_perform['Placement Offer Count']<3)))
+
+z = np.abs(stats.zscore(Stud_perform['Club Join Year']))
+print(z)
+
+threshold = 1.6
+sample_outliers = np.where(z <threshold)
+sample_outliers
+
+sorted_rscore= sorted(Stud_perform['Club Join Year'])
+sorted_rscore
+
+q1 = np.percentile(sorted_rscore, 25)
+q3 = np.percentile(sorted_rscore, 75)
+print(q1,q3)
+
+IQR = q3-q1
+lwr_bound = q1-(1.5*IQR)
+upr_bound = q3+(1.5*IQR)
+print(lwr_bound, upr_bound)
+
+r_outliers = []
+for i in sorted_rscore:
+    if (i<lwr_bound or i>upr_bound):
+        r_outliers.append(i)
+print(r_outliers)
+
+Stud_perform=pd.read_csv("StudentPerformance.csv")
+Stud_perform_stud=Stud_perform
+ninetieth_percentile = np.percentile(Stud_perform_stud['Math Score'], 90)
+b = np.where(Stud_perform_stud['Math Score']>ninetieth_percentile,
+ninetieth_percentile, Stud_perform_stud['Math Score'])
+print("New array:",b)
+
+Stud_perform_stud.insert(1,"m score",b,True)
+Stud_perform_stud
+
+col = ['Reading Score']
+Stud_perform.boxplot(col)
+plt.show()
+
+median=np.median(sorted_rscore)
+median
+
+refined_Stud_perform=Stud_perform
+refined_Stud_perform['Reading Score'] = np.where(refined_Stud_perform['Reading Score'] >upr_bound, median,refined_Stud_perform['Reading Score'])
+refined_Stud_perform
+
+refined_Stud_perform=Stud_perform
+refined_Stud_perform['Reading Score'] = np.where(refined_Stud_perform['Reading Score'] >lwr_bound, median,refined_Stud_perform['Reading Score'])
+refined_Stud_perform
+
+col = ['Reading Score']
+refined_Stud_perform.boxplot(col)
+plt.show()
+
+Stud_perform['Reading Score'].plot(kind = 'hist')
+plt.show()
+
+Stud_perform['log_math'] = np.log10(Stud_perform['Placement Offer Count'])
+Stud_perform['log_math'].plot(kind = 'hist')
+plt.show()

@@ -1,0 +1,54 @@
+%matplotlib inline
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from seaborn import load_dataset
+
+#titanic dataset
+df = pd.read_csv("titanic_train.csv")
+#tips dataset
+tips = load_dataset("tips")
+df.head()
+
+sns.countplot(x='Survived', data=df)
+plt.show()
+
+df['Sex'].value_counts().plot(kind="pie", autopct="%.2f")
+plt.show()
+
+df = df.dropna()
+plt.hist(df['Age'], bins=5)
+plt.show()
+
+sns.distplot(df['Age'])
+plt.show()
+
+sns.scatterplot(x='total_bill', y='tip', data=tips)
+plt.scatter
+
+sns.scatterplot(x='total_bill', y='tip', data=tips, hue=tips["sex"])
+plt.scatter
+
+sns.scatterplot(x='total_bill', y='tip', data=tips, hue=tips["sex"], style=tips['smoker'])
+plt.show()
+
+
+sns.barplot(x='Pclass', y='Fare', data=df, hue = df["Sex"])
+plt.show()
+
+sns.boxplot(x='Sex', y='Age', data=df)
+
+sns.boxplot(x='Sex', y='Age', hue='Survived', data=df)
+plt.show()
+
+sns.kdeplot(df[df['Survived'] == 0]['Age'], shade=True, color="blue", label='Did not survive') 
+sns.kdeplot(df[df['Survived'] == 1]['Age'], shade=True, color="orange", label='Survived')
+plt.legend()
+plt.show()
+
+pd.crosstab(df['Pclass'], df['Survived'])
+
+sns.heatmap(pd.crosstab(df['Pclass'], df['Survived']))
+
+sns.clustermap(pd.crosstab(df['Parch'], df['Survived']))

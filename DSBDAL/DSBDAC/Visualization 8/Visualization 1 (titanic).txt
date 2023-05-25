@@ -1,0 +1,57 @@
+%matplotlib inline
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset('titanic')
+df.head()
+
+df.info()
+
+sns.distplot(df['fare'])
+
+sns.distplot(df['fare'], kde=False, bins=10)
+
+sns.jointplot(x='age', y='fare', data=df)
+
+sns.jointplot(x='age', y='fare', data=df, kind='hex')
+
+df = df.dropna()
+sns.pairplot(df)
+
+df = df.dropna()
+sns.pairplot(df, hue='sex')
+
+sns.rugplot(df['fare'])
+
+sns.barplot(x='sex', y='age', data=df)
+
+sns.countplot(x='sex', data=df)
+
+sns.boxplot(x='sex', y='age', data=df)
+
+sns.boxplot(x='sex', y='age', data=df, hue="survived")
+
+sns.violinplot(x='sex', y='age', data=df)
+
+sns.violinplot(x='sex', y='age', data=df, hue='survived')
+
+sns.violinplot(x='sex', y='age', data=df, hue='survived', split=True)
+
+sns.stripplot(x='sex', y='age', data=df)
+
+sns.stripplot(x='sex', y='age', data=df, jitter=True)
+
+sns.stripplot(x='sex', y='age', data=df, jitter=True, hue='survived')
+
+sns.stripplot(x='sex', y='age', data=df, jitter=True, hue='survived')
+
+sns.swarmplot(x='sex', y='age', data=df)
+
+sns.swarmplot(x='sex', y='age', data=df, hue='survived')
+
+sns.swarmplot(x='sex', y='age', data=df, hue='survived', dodge=True)
+
+sns.violinplot(x='sex', y='age', data=df)
+sns.swarmplot(x='sex', y='age', data=df, color='black')

@@ -1,0 +1,71 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import preprocessing
+
+df = pd.read_csv("iris.csv")
+
+df.head()
+
+df.select_dtypes(include=['float64', 'int64']).mean()
+
+df.loc[:,'sepal_length'].mean()
+
+df.select_dtypes(include=['float64', 'int64']).mean(axis=1)[0:4]
+
+df.select_dtypes(include=['float64', 'int64']).median()
+
+df.loc[:,'sepal_width'].median()
+
+df.select_dtypes(include=['float64', 'int64']).median(axis=1)[0:5]
+
+df.mode()
+
+df.loc[:,'petal_length'].mode()
+
+df.min()
+
+df.loc[:,'petal_width'].min(skipna = False)
+
+df.max()
+
+df.loc[:,'petal_width'].max(skipna = False)
+
+df.select_dtypes(include=['float64', 'int64']).std()
+
+df.loc[:,'sepal_width'].std()
+
+df.select_dtypes(include=['float64', 'int64']).std(axis=1)[0:4]
+
+df.groupby(['species'])['sepal_width'].mean()
+
+df_u=df.rename(columns= {'Petal Width$)':'petal_width'},inplace=False)
+(df_u.groupby(['species']).sepal_width.mean())
+
+enc = preprocessing.OneHotEncoder()
+enc_df = pd.DataFrame(enc.fit_transform(df[['sepal_width']]).toarray())
+enc_df.head(6)
+
+from sklearn import preprocessing
+enc = preprocessing.LabelEncoder()
+df['sepal_width']= enc.fit_transform(df['sepal_width'])
+dfl=df
+df
+
+df_encode =df_u.join(enc_df)
+df_encode.head(5)
+
+csv_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+col_names = ['Sepal_Length','Sepal_Width','Petal_Length','Petal_Width','Species']
+iris = pd.read_csv(csv_url, names = col_names)
+irisSet = (iris['Species']== 'Iris-setosa')
+print('Iris-setosa')
+print(iris[irisSet].describe())
+irisVer = (iris['Species']== 'Iris-versicolor')
+print('Iris-versicolor')
+print(iris[irisVer].describe())
+irisVir = (iris['Species']== 'Iris-virginica')
+print('Iris-virginica')
+print(iris[irisVir].describe())
+

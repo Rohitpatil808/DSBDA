@@ -1,0 +1,129 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+weather = pd.read_csv("weatherAUS.csv") 
+
+Panda Dataframe functions for Data Preprocessing :Dataframe Operations:
+
+weather.head(3)
+
+weather.info()
+
+weather.describe(include='all')
+
+weather.tail(7)
+
+weather.index
+
+weather.columns
+
+weather.dtypes
+
+weather.columns.values
+
+weather.describe(include='all')
+
+weather['MinTemp']
+
+weather.sort_index(axis=1,ascending=False)
+
+weather.sort_values(by="Location")
+
+weather.iloc[5]
+
+weather[0:3]
+
+weather.loc[:,["Location","MaxTemp"]]
+
+weather.iloc[:5, :]
+
+weather.iloc[:, :5]
+
+weather.iloc[:7, :3]
+
+isnull()
+
+weather.isnull()
+
+weather.isnull().any()
+
+weather.isnull().sum() 
+
+weather.isnull().sum().sum()
+
+weather.isnull().sum(axis=1) 
+
+Q] What is data wrangling? 
+Ans] Data wrangling describes a series of processes designed to explore, transform, 
+and validate raw datasets from their messy and complex forms into high-quality data.
+ You can use your wrangled data to produce valuable insights and guide business decisions
+
+Q] Data wrangling steps 
+Ans] There are four broad steps in the munging process:
+
+1. Discovery
+In the discovery stage, you'll essentially prepare yourself for rest of the process.
+ Here, you'll think about the questions you want to answer and the type of data you'll need in order to answer them. 
+You'll also locate the data you plan to use and examine its current form in order
+ to figure out how you'll clean, structure, and organize your data in the following stages.
+
+2. Transformation
+During the transformation stage, you'll act on the plan you developed during the discovery stage.
+ This piece of the process can be broken down into four components: structuring, normalizing and denormalizing, cleaning, and enriching.
+
+Data structuring
+When you structure data, you make sure that your various datasets are in compatible formats. 
+This way, when you combine or merge data, it's in a form that's appropriate for the analytical model you want to use to interpret the data.
+
+Normalizing and denormalizing data
+Data normalization involves organizing your data into a coherent database and getting rid of irrelevant or repetitive data.
+ Denormalization involves combining multiple tables or relational databases, making the analysis process quicker. 
+Keep your analysis goal and business users in mind as you think about normalization and denormalization.
+
+3. Validation
+During the validation step, you essentially check the work you did during the transformation stage, 
+verifying that your data is consistent, of sufficient quality, and secure. 
+This step may be completed using automated processes and can require some programming skills.
+
+
+4. Publishing
+After you've finished validating your data, you're ready to publish it. When you publish data, you'll put it into whatever file format you prefer for sharing with other team members for downstream analysis purposes.
+
+Data cleaning
+During the cleaning process, you remove errors that might distort or damage the accuracy of your analysis. 
+This includes tasks like standardizing inputs, deleting duplicate values or empty cells, 
+removing outliers, fixing inaccuracies, and addressing biases. Ultimately, the goal is to make sure the data is as error-free as possible.
+
+Enriching data
+Once you've transformed your data into a more usable form, consider whether you have all the data you need for your analysis. 
+If you don't, you can enrich it by adding values from other datasets. You also may want to add metadata to your database at this point.
+
+Q] What is numpy?
+Ans] NumPy can be used to perform a wide variety of mathematical operations on arrays. 
+It adds powerful data structures to Python that guarantee efficient calculations
+ with arrays and matrices and it supplies an enormous library of high-level mathematical functions that operate on these arrays and matrices.
+
+Q] What Can Pandas Do?
+
+ANS] Short answer is that you need Pandas to gain access to many functions for performing data analysis in Python. 
+It is especially useful for doing data modeling, data analysis and data manipulation.
+
+Pandas provides two data structures Series and DataFrame, which give you flexibility to work with data sets in different formats, 
+like tabular, time-series, and matrix data. DataFrame provides the foundation to perform essential operations like data alignment, 
+calculating statistics, slicing, grouping, merging, adding or splitting sets of data. It is useful for working with three dimensional data from tables.
+
+Q] What is import matplotlib ?
+
+Ans] Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python.
+ Matplotlib makes easy things easy and hard things possible.
+Matplotlib is a cross-platform, data visualization and graphical plotting library 
+(histograms, scatter plots, bar charts, etc) for Python and its numerical extension NumPy.
+
+
+Q] How to install seaborn in Python?
+Ans] Why should I use seaborn?
+Seaborn is more comfortable with Pandas data frames. It utilizes simple sets of techniques to produce lovely images in Python.
+ Matplotlib is highly customized and robust. With the help of its default themes, Seaborn prevents overlapping plots.
+ As such, it offers a viable open source alternative to MATLAB
